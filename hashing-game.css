@@ -1,0 +1,156 @@
+:root {
+    --game-bg: #1c1f26;
+    --game-bucket-bg: #6366f1;
+    --game-bucket-label: #6366f1;
+    --game-number-bg: #e74c3c;
+    --game-number-hover: #c0392b;
+    --game-text-color: #ffffff;
+    --game-highlight: #1ea0eb;
+    --game-border: #34495e;
+}
+
+body {
+    background-color: var(--game-bg);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--game-text-color);
+}
+
+.header {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 1.25rem;
+    background: var(--game-bucket-label);
+    border-bottom: 2px solid var(--game-border);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.main-content {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.button {
+    display: inline-block;
+    background-color: var(--game-highlight);
+    color: var(--game-text-color);
+    padding: 0.75rem 1.5rem;
+    margin: 1rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: var(--game-number-hover);
+    transform: scale(1.05);
+}
+
+#game-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 1rem;
+}
+
+.bucket {
+    width: 80px;
+    min-height: 150px;
+    background: var(--game-bucket-bg);
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bucket-label {
+    padding: 8px;
+    background: var(--game-bucket-label);
+    color: var(--game-text-color);
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid var(--game-border);
+}
+
+.bucket-content {
+    flex-grow: 1;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+.bucket-number {
+    background: var(--game-number-bg);
+    color: var(--game-text-color);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.bucket-number:hover {
+    background-color: var(--game-number-hover);
+    transform: scale(1.1);
+}
+
+#hashTable {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(44, 62, 80, 0.15);
+    border-top: 2px solid var(--game-border);
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.falling-number {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: var(--game-number-bg);
+    color: var(--game-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    transition: top 0.02s linear, left 0.3s ease-out, transform 0.3s ease-out;
+    animation: bounce 0.5s ease-in-out infinite alternate;
+}
+
+.falling-number:hover {
+    background-color: var(--game-number-hover);
+    transform: scale(1.2);
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.instructions {
+    margin: 2rem auto;
+    max-width: 600px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--game-border);
+    border-radius: 8px;
+    padding: 1rem;
+    color: var(--game-text-color);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hash Hunt Game</title>
+  <link rel="stylesheet" href="hashing-game.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">🎮 Hash Hunt</div>
+    <nav>
+      <a href="hashing.html" class="button">Back to Hashing</a>
+    </nav>
+  </header>
+  <main class="main-content">
+    <h1>Hash Hunt</h1>
+    <p>Press the number key (0-9) to direct the falling number into its correct bucket! 
+       <br><strong>Instructions:</strong> Press the key that matches <code>number % 10</code> to move the number to that bucket. 
+       Each correct placement gives 10 points. Wrong placements count as misses. Game ends after 5 misses or when time runs out.</p>
+    
+    <div id="gameContainer">
+      <div id="fallingContainer"></div>
+      <div id="hashTable">
+        <div class="bucket" data-index="0">
+          <div class="bucket-label">0</div>
+          <div class="bucket-content"></div>
+        </div>
+        <div class="bucket" data-index="1">
+          <div class="bucket-label">1</div>
+          <div class="bucket-content"></div>
+        </div>
+        <div class="bucket" data-index="2">
+          <div class="bucket-label">2</div>
+          <div class="bucket-content"></div>
+        </div>
+        <div class="bucket" data-index="3">
+          <div class="bucket-label">3</div>
+          <div class="bucket-content"></div>
+        </div>
+        <div class="bucket" data-index="4">
+          <div class="bucket-label">4</div>
+          <div class="bucket-content"></div>
+        </div>
+        <div class="bucket" data-index="5">
+          <div class="bucket-label">5</div>
+          <div class="bucket-content"></div>
+        </div>
+        <div class="bucket" data-index="6">
+          <div class="bucket-label">6</div>
+          <div class="bucket-content"></div>
+        </div>
+        <div class="bucket" data-index="7">
+          <div class="bucket-label">7</div>
+          <div class="bucket-content"></div>
+        </div>
+        <div class="bucket" data-index="8">
+          <div class="bucket-label">8</div>
+          <div class="bucket-content"></div>
+        </div>
+        <div class="bucket" data-index="9">
+          <div class="bucket-label">9</div>
+          <div class="bucket-content"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="game-info">
+      <p>Score: <span id="score">0</span></p>
+      <p>Missed: <span id="missedCount">0</span> (Max 5)</p>
+      <p>Time Left: <span id="timeLeft">60</span> seconds</p>
+    </div>
+    
+    <button id="startGame" class="button">Start Game</button>
+  </main>
+  <script src="hashing-game.js"></script>
+</body>
+</html>

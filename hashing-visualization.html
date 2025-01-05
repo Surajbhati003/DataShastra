@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hash Function Visualizer</title>
+    <style>
+        :root {
+        --color-bg: #111827;
+        --color-bg-secondary: #1f2937;
+        --color-primary: #6366f1;
+        --color-primary-hover: #4f46e5;
+        --color-text: #f3f4f6;
+        --color-text-secondary: #9ca3af;
+        --color-border: #374151;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--color-bg-secondary);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--color-bg-secondary);
+            border-radius: 6px;
+            }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--color-text-secondary);
+        }
+
+        select,
+        input,
+        button {
+            padding: 8px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            margin: 2px 0;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            transition: all 0.3s;
+        }
+
+        button {
+            background-color: var(--color-primary);
+            color: var(--color-text);
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        .hash-function {
+            background-color: var(--color-bg-secondary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            font-family: monospace;
+            color: var(--color-text-secondary);
+        }
+
+        .visualization {
+            height: 150px;
+            position: relative;
+            margin: 20px 0;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--color-bg);
+        }
+
+        .hash-table {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 10px;
+        }
+
+        .bucket {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            min-height: 40px;
+        }
+
+        .bucket-index {
+            min-width: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+            color: var(--color-text);
+        }
+
+        .value {
+            background-color: var(--color-primary);
+            color: var(--color-text);
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 0 5px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .value.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .moving-number {
+            position: absolute;
+            background-color: var(--color-primary-hover);
+            color: var(--color-text);
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 1s ease-in-out;
+        }
+
+        .explanation {
+            background-color: var(--color-bg-secondary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            line-height: 1.5;
+            color: var(--color-text-secondary);
+        }
+
+        .collision-strategy {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: var(--color-bg-secondary);
+            border-radius: 4px;
+        }
+
+        .error {
+            color: #e74c3c;
+            margin-top: 5px;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hash Function Visualizer</h1>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="hashMethod">Hash Method:</label>
+                <select id="hashMethod" onchange="updateHashMethod()">
+                    <option value="division">Division Method</option>
+                    <option value="multiplication">Multiplication Method</option>
+                    <option value="folding">Folding Method</option>
+                    <option value="midSquare">Mid-Square Method</option>
+                    <option value="universal">Universal Hashing</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="collisionHandling">Collision Handling:</label>
+                <select id="collisionHandling" onchange="updateCollisionStrategy()">
+                    <option value="chaining">Chaining</option>
+                    <option value="linearProbing">Linear Probing</option>
+                    <option value="quadraticProbing">Quadratic Probing</option>
+                    <option value="doubleHashing">Double Hashing</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="tableSize">Table Size:</label>
+                <input type="number" id="tableSize" value="10" min="1" max="50" onchange="updateTableSize()">
+            </div>
+
+            <div class="control-group">
+                <label for="numberInput">Input Number:</label>
+                <input type="number" id="numberInput" placeholder="Enter a number">
+                <span class="error" id="inputError">Please enter a valid number</span>
+            </div>
+        </div>
+
+        <button onclick="insertNumber()">Insert Number</button>
+        <button onclick="clearTable()">Clear Table</button>
+
+        <div class="explanation" id="methodExplanation"></div>
+        <div class="hash-function" id="hashFunction"></div>
+        <div class="visualization" id="visualization"></div>
+        <div class="hash-table" id="hashTable"></div>
+    </div>
+
+    <script>
+        let tableSize = 10;
+        let hashTable = [];
+        let currentHashMethod = 'division';
+        let currentCollisionStrategy = 'chaining';
+
+        // Hash function implementations
+        const hashFunctions = {
+            division: (number) => {
+                return number % tableSize;
+            },
+            multiplication: (number) => {
+                const A = 0.6180339887; // Golden ratio
+                const product = number * A;
+                const fractional = product - Math.floor(product);
+                return Math.floor(tableSize * fractional);
+            },
+            folding: (number) => {
+                const str = number.toString();
+                let sum = 0;
+                for (let i = 0; i < str.length; i += 2) {
+                    sum += parseInt(str.slice(i, i + 2) || str.slice(i));
+                }
+                return sum % tableSize;
+            },
+            midSquare: (number) => {
+                const squared = (number * number).toString();
+                const mid = Math.floor(squared.length / 2);
+                const extracted = squared.slice(mid - 1, mid + 1);
+                return parseInt(extracted) % tableSize;
+            },
+            universal: (number) => {
+                const a = 1731;  // Random prime
+                const b = 520;   // Random constant
+                const p = 2147483647; // Large prime
+                return ((a * number + b) % p) % tableSize;
+            }
+        };
+
+        // Method explanations
+        const explanations = {
+            division: "Division Method (h(k) = k mod m): This is the simplest hashing method. It uses the remainder of division by the table size to determine the index. Works best when the table size is a prime number not close to a power of 2 or 10.",
+            multiplication: "Multiplication Method (h(k) = ⌊m(kA mod 1)⌋): Uses multiplication by a constant A (often the golden ratio) and extracting the fractional part. Good for any table size and works well when the key distribution is unknown.",
+            folding: "Folding Method: Divides the key into parts and combines them (usually by adding) to form the hash value. Particularly useful for string or long numeric keys where you want to use all parts of the key in computing the hash.",
+            midSquare: "Mid-Square Method: Squares the key and takes the middle digits. Good for keys where middle digits have more variability than leading or trailing digits.",
+            universal: "Universal Hashing: Uses randomly chosen parameters to compute the hash. Provides good theoretical guarantees against weak input patterns. Formula: ((ak + b) mod p) mod m, where a and b are random and p is prime."
+        };
+
+        function updateHashMethod() {
+            currentHashMethod = document.getElementById('hashMethod').value;
+            document.getElementById('methodExplanation').textContent = explanations[currentHashMethod];
+            clearTable();
+        }
+
+        function updateCollisionStrategy() {
+            currentCollisionStrategy = document.getElementById('collisionHandling').value;
+            clearTable();
+        }
+
+        function updateTableSize() {
+            const newSize = parseInt(document.getElementById('tableSize').value);
+            if (newSize > 0 && newSize <= 50) {
+                tableSize = newSize;
+                clearTable();
+            }
+        }
+
+        function initializeHashTable() {
+            const hashTableElement = document.getElementById('hashTable');
+            hashTableElement.innerHTML = '';
+            hashTable = new Array(tableSize).fill(null).map(() => []);
+
+            for (let i = 0; i < tableSize; i++) {
+                const bucket = document.createElement('div');
+                bucket.className = 'bucket';
+                bucket.innerHTML = `<div class="bucket-index">${i}</div>`;
+                hashTableElement.appendChild(bucket);
+            }
+        }
+
+        function showHashFunction(number, hashValue) {
+            const hashFunctionElement = document.getElementById('hashFunction');
+            let explanation = '';
+            
+            switch(currentHashMethod) {
+                case 'division':
+                    explanation = `h(${number}) = ${number} mod ${tableSize} = ${hashValue}`;
+                    break;
+                case 'multiplication':
+                    const A = 0.6180339887;
+                    explanation = `h(${number}) = floor(${tableSize} * frac(${number} * ${A.toFixed(4)})) = ${hashValue}`;
+                    break;
+                case 'folding':
+                    explanation = `h(${number}) = sum of digits pairs mod ${tableSize} = ${hashValue}`;
+                    break;
+                case 'midSquare':
+                    const squared = number * number;
+                    explanation = `h(${number}) = middle digits of ${number}² (${squared}) mod ${tableSize} = ${hashValue}`;
+                    break;
+                case 'universal':
+                    explanation = `h(${number}) = ((1731 * ${number} + 520) mod 2147483647) mod ${tableSize} = ${hashValue}`;
+                    break;
+            }
+            
+            hashFunctionElement.innerHTML = explanation;
+        }
+
+        function handleCollision(hashValue, number) {
+            switch(currentCollisionStrategy) {
+                case 'chaining':
+                    return hashValue;
+                case 'linearProbing':
+                    let index = hashValue;
+                    while (hashTable[index].length > 0) {
+                        index = (index + 1) % tableSize;
+                        if (index === hashValue) return -1; // Table is full
+                    }
+                    return index;
+                case 'quadraticProbing':
+                    let i = 0;
+                    let newHash = hashValue;
+                    while (hashTable[newHash].length > 0) {
+                        i++;
+                        newHash = (hashValue + i * i) % tableSize;
+                        if (i >= tableSize) return -1; // Could not find slot
+                    }
+                    return newHash;
+                case 'doubleHashing':
+                    const hash2 = 1 + (number % (tableSize - 1));
+                    let j = 0;
+                    let doubleHash = hashValue;
+                    while (hashTable[doubleHash].length > 0) {
+                        j++;
+                        doubleHash = (hashValue + j * hash2) % tableSize;
+                        if (j >= tableSize) return -1;
+                    }
+                    return doubleHash;
+            }
+        }
+
+        function animateInsertion(number, hashValue, finalIndex) {
+            const visualization = document.getElementById('visualization');
+            const movingNumber = document.createElement('div');
+            movingNumber.className = 'moving-number';
+            movingNumber.textContent = number;
+            movingNumber.style.left = '50%';
+            movingNumber.style.top = '0';
+            visualization.appendChild(movingNumber);
+
+            setTimeout(() => {
+                movingNumber.style.top = '50%';
+            }, 100);
+
+            setTimeout(() => {
+                movingNumber.style.left = `${(finalIndex / tableSize) * 100}%`;
+                movingNumber.style.top = '100%';
+            }, 1000);
+
+            setTimeout(() => {
+                visualization.removeChild(movingNumber);
+                addValueToBucket(number, finalIndex);
+            }, 2000);
+        }
+
+        function addValueToBucket(number, index) {
+            const bucket = document.getElementsByClassName('bucket')[index];
+            const valueElement = document.createElement('div');
+            valueElement.className = 'value';
+            valueElement.textContent = number;
+            bucket.appendChild(valueElement);
+
+            setTimeout(() => {
+                valueElement.classList.add('show');
+            }, 50);
+
+            hashTable[index].push(number);
+        }
+
+        function insertNumber() {
+            const input = document.getElementById('numberInput');
+            const number = parseInt(input.value);
+
+            if (isNaN(number)) {
+                document.getElementById('inputError').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('inputError').style.display = 'none';
+            const initialHash = hashFunctions[currentHashMethod](number);
+            const finalIndex = handleCollision(initialHash, number);
+
+            if (finalIndex === -1) {
+                alert('Hash table is full or no available slot found!');
+                return;
+            }
+
+            showHashFunction(number, initialHash);
+            animateInsertion(number, initialHash, finalIndex);
+            input.value = '';
+        }
+
+        function clearTable() {
+            initializeHashTable();
+            document.getElementById('hashFunction').innerHTML = '';
+            document.getElementById('visualization').innerHTML = '';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeHashTable();
+            updateHashMethod();
+        });
+    </script>
+</body>
+</html>
