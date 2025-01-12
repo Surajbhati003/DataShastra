@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collision Handling</title>
+    <!-- Updated Lucide Icons Import -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+    <style>
+        :root {
+            --color-bg: #111827;
+            --color-bg-secondary: #1f2937;
+            --color-primary: #10b981;
+            --color-primary-hover: #059669;
+            --color-text: #f3f4f6;
+            --color-text-secondary: #9ca3af;
+            --color-border: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--color-primary), #34d399);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            max-width: 42rem;
+            margin: 0 auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2rem 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .content-card {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 0.75rem;
+            padding: 2rem;
+        }
+
+        .topic-icon {
+            background-color: var(--color-bg);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            width: fit-content;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .topic-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .content-list {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            color: var(--color-text-secondary);
+        }
+
+        .content-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--color-text);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2col {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        .topic-icon svg {
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover .topic-icon svg {
+            transform: scale(1.1);
+        }
+
+        .content-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--color-primary);
+        }
+
+        .content-text {
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .content-card,
+            .topic-icon svg {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Collision Handling in Hashing</h1>
+            <p>Discover the key techniques and methods to efficiently handle collisions in hashing and ensure optimal performance of hash-based data structures.</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-grid">
+            <!-- Separate Chaining -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+                </div>
+                <h3 class="card-title">Separate Chaining</h3>
+                <p class="content-text">Separate chaining is a collision resolution technique that stores collided elements in a list at the same bucket index.</p>
+                <ul class="content-list">
+                    <li><strong>Linked List:</strong> Each bucket contains a linked list of collided elements.</li>
+                    <li><strong>Dynamic Array:</strong> Collisions are stored in a dynamically growing array for each bucket.</li>
+                    <li><strong>Binary Search Tree:</strong> Improved search efficiency for high-collision scenarios.</li>
+                    <li><strong>Self-Balancing Trees:</strong> Optimal for managing long chains in large datasets.</li>
+                </ul>
+            </div>
+
+            <!-- Open Addressing -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <h3 class="card-title">Open Addressing</h3>
+                <p class="content-text">Open addressing resolves collisions by probing other slots in the hash table for empty space.</p>
+                <ul class="content-list">
+                    <li><strong>Linear Probing:</strong> Sequentially checks the next available slot.</li>
+                    <li><strong>Quadratic Probing:</strong> Uses a quadratic function to calculate probe intervals.</li>
+                    <li><strong>Double Hashing:</strong> Applies a secondary hash function to compute probe intervals.</li>
+                    <li><strong>Cuckoo Hashing:</strong> Uses multiple hash functions to relocate collided elements.</li>
+                </ul>
+            </div>
+
+            <!-- Performance Considerations -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3 class="card-title">Performance Considerations</h3>
+                <ul class="content-list">
+                    <li><strong>Load Factor:</strong> Optimal balance between memory usage and collision frequency.</li>
+                    <li><strong>Rehashing:</strong> Triggered when the load factor exceeds a threshold, resizing the hash table.</li>
+                    <li><strong>Space Complexity:</strong> Overhead differs based on separate chaining or open addressing.</li>
+                    <li><strong>Time Complexity:</strong> Lookup, insertion, and deletion depend on collision resolution efficiency.</li>
+                </ul>
+            </div>
+
+            <!-- Applications -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3 class="card-title">Applications</h3>
+                <ul class="content-list">
+                    <li><strong>Database Indexing:</strong> Efficient key-value data retrieval.</li>
+                    <li><strong>Hash Maps:</strong> Core data structure in modern programming.</li>
+                    <li><strong>Caches:</strong> High-speed data storage and lookup.</li>
+                    <li><strong>Network Routing:</strong> Quick lookup in routing tables.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding 2-3 Trees</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+    <style>
+        :root {
+            --color-bg: #111827;
+            --color-bg-secondary: #1f2937;
+            --color-primary: #10b981;
+            --color-primary-hover: #059669;
+            --color-text: #f3f4f6;
+            --color-text-secondary: #9ca3af;
+            --color-border: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--color-primary), #34d399);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            max-width: 42rem;
+            margin: 0 auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2rem 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .content-card {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 0.75rem;
+            padding: 2rem;
+        }
+
+        .topic-icon {
+            background-color: var(--color-bg);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            width: fit-content;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .topic-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .content-list {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            color: var(--color-text-secondary);
+        }
+
+        .content-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--color-text);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2col {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        .topic-icon svg {
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover .topic-icon svg {
+            transform: scale(1.1);
+        }
+
+        .content-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--color-primary);
+        }
+
+        .content-text {
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .content-card,
+            .topic-icon svg {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Understanding 2-3 Trees</h1>
+            <p>Explore the fundamentals of 2-3 Trees, a balanced search tree that efficiently organizes and retrieves data with guaranteed performance and structure.</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-grid">
+            <!-- Core Concepts -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                </div>
+                <h3 class="card-title">Core Concepts</h3>
+                <p class="content-text">A 2-3 Tree is a self-balancing search tree where each node contains either 2 or 3 children. This structure ensures consistent performance for insertion, deletion, and search operations.</p>
+                <ul class="content-list">
+                    <li>Each node contains one or two keys.</li>
+                    <li>Nodes with one key have two children (2-node).</li>
+                    <li>Nodes with two keys have three children (3-node).</li>
+                    <li>All leaves are at the same depth, ensuring balance.</li>
+                </ul>
+            </div>
+
+            <!-- Operations -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <h3 class="card-title">Operations</h3>
+                <div class="grid-2col">
+                    <div>
+                        <h4 class="section-subtitle">Insertion</h4>
+                        <ul class="content-list">
+                            <li>Find the appropriate leaf node for the new key.</li>
+                            <li>Insert the key into the node while maintaining sorted order.</li>
+                            <li>Split the node into 2 if it becomes overfilled (3 keys).</li>
+                            <li>Propagate the middle key upwards as needed.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="section-subtitle">Deletion</h4>
+                        <ul class="content-list">
+                            <li>Find the node containing the key to delete.</li>
+                            <li>If internal, replace the key with its in-order successor/predecessor.</li>
+                            <li>Merge nodes or redistribute keys to maintain balance if underflow occurs.</li>
+                            <li>Adjust parent nodes recursively if necessary.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Properties -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="4"/><line x1="20" y1="20" x2="4" y2="4"/></svg>
+                </div>
+                <h3 class="card-title">Key Properties</h3>
+                <p class="content-text">2-3 Trees maintain a balanced structure, ensuring predictable and efficient operations regardless of dataset size.</p>
+                <ul class="content-list">
+                    <li>All leaf nodes are at the same depth.</li>
+                    <li>Height of the tree is logarithmic to the number of keys.</li>
+                    <li>Minimizes the need for rebalancing during insertions and deletions.</li>
+                    <li>Supports fast lookup, insertion, and deletion.</li>
+                </ul>
+            </div>
+
+            <!-- Applications -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3 class="card-title">Practical Applications</h3>
+                <div class="grid-2col">
+                    <div>
+                        <h4 class="section-subtitle">Database Indexing</h4>
+                        <ul class="content-list">
+                            <li>Efficiently manages sorted datasets.</li>
+                            <li>Supports range queries and lookups.</li>
+                            <li>Reduces disk I/O operations.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="section-subtitle">Data Storage</h4>
+                        <ul class="content-list">
+                            <li>Useful in file systems for hierarchical organization.</li>
+                            <li>Manages metadata and directory structures.</li>
+                            <li>Ensures consistency during concurrent access.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

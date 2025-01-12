@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collision Resolution Visualization</title>
+    <link rel="stylesheet" href="collision.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Collision Resolution Visualization</h1>
+        <div class="selection">
+            <label for="method">Choose Collision Resolution Method:</label>
+            <select id="method" onchange="updateVisualization()">
+                <option value="open-addressing">Open Addressing</option>
+                <option value="separate-chaining">Separate Chaining</option>
+                <option value="buckets">Buckets</option>
+            </select>
+        </div>
+        <div class="open-addressing-options" id="open-addressing-options" style="display: none;">
+            <label for="open-method">Choose Open Addressing Method:</label>
+            <select id="open-method" onchange="updateVisualization()">
+                <option value="linear">Linear Probing</option>
+                <option value="quadratic">Quadratic Probing</option>
+                <option value="double">Double Hashing</option>
+            </select>
+        </div>
+        <div class="input-section">
+            <input type="number" id="input-value" placeholder="Enter a number" />
+            <button onclick="addValue()">Add Value</button>
+        </div>
+
+        <div id="visualization" class="visualization">
+            <h2 id="visualization-title">Open Addressing Visualization</h2>
+            <div class="formula" id="formula"></div>
+            <table id="hash-table">
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic content will be inserted here -->
+                </tbody>
+            </table>
+            <div class="collision-info" id="collision-info" style="display: none;"></div>
+            <div class="linked-list" id="separate-chaining" style="display: none;">
+                <h2>Separate Chaining Representation</h2>
+                <div class="formula" id="separate-chaining-formula"></div>
+                <ul id="linked-list-content">
+                    <!-- Dynamic content will be inserted here -->
+                </ul>
+            </div>
+            <div class="buckets" id="buckets" style="display: none;">
+                <h2>Bucket Representation</h2>
+                <div class="formula" id="bucket-formula"></div>
+                <ul id="bucket-content">
+                    <!-- Dynamic content will be inserted here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- <svg id="neon-effect" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#00ffcc" stroke-width="3" />
+        <circle cx="50" cy="50" r="35" fill="none" stroke="#ff00ff" stroke-width="3" />
+        <circle cx="50" cy="50" r="30" fill="none" stroke="#ffcc00" stroke-width="3" />
+    </svg> -->
+
+    <script src="collision.js"></script>
+</body>
+</html>

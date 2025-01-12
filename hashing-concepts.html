@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Hashing</title>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+    <style>
+        
+        :root {
+            --color-bg: #111827;
+            --color-bg-secondary: #1f2937;
+            --color-primary: #6366f1;
+            --color-primary-hover: #4f46e5;
+            --color-text: #f3f4f6;
+            --color-text-secondary: #9ca3af;
+            --color-border: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--color-primary), #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            max-width: 42rem;
+            margin: 0 auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2rem 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .content-card {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 0.75rem;
+            padding: 2rem;
+        }
+
+        .topic-icon {
+            background-color: var(--color-bg);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            width: fit-content;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .topic-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .content-list {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            color: var(--color-text-secondary);
+        }
+
+        .content-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--color-text);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2col {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        .topic-icon svg {
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover .topic-icon svg {
+            transform: scale(1.1);
+        }
+
+        .content-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--color-primary);
+        }
+
+        .content-text {
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .content-card,
+            .topic-icon svg {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Understanding Hashing</h1>
+            <p>Explore the fundamental concepts of hashing - from core principles and algorithms to advanced implementations and real-world applications.</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-grid">
+            <!-- Core Concepts -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                </div>
+                <h3 class="card-title">Core Concepts</h3>
+                <p class="content-text">Hashing is a fundamental technique in computer science that transforms input data of arbitrary size into fixed-size values. This transformation is essential for data organization, retrieval, and security.</p>
+                <div class="grid-2col">
+                    <div>
+                        <h4 class="section-subtitle">Essential Properties:</h4>
+                        <ul class="content-list">
+                            <li>Deterministic Output: Identical inputs always produce identical hash values</li>
+                            <li>Uniform Distribution: Hash values are evenly distributed</li>
+                            <li>Avalanche Effect: Small input changes result in different hash values</li>
+                            <li>Fixed Output Length: Hash value size remains constant</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hash Functions -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <h3 class="card-title">Hash Functions</h3>
+                <div class="grid-2col">
+                    <div>
+                        <h4 class="section-subtitle">Simple Hash Functions</h4>
+                        <ul class="content-list">
+                            <li>Division Method: Simple modulo operation with prime numbers</li>
+                            <li>Multiplication Method: Uses floating-point multiplication</li>
+                            <li>Mid-Square Method: Squares the key and takes middle digits</li>
+                            <li>Folding Method: Partitions key and combines parts</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="section-subtitle">Cryptographic Hash Functions</h4>
+                        <ul class="content-list">
+                            <li>SHA-256: Standard for digital signatures and blockchain</li>
+                            <li>SHA-3: Advanced encryption standard</li>
+                            <li>BLAKE2: High-performance secure hashing</li>
+                            <li>Argon2: Specialized for password hashing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collision Resolution -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+                </div>
+                <h3 class="card-title">Collision Resolution</h3>
+                <p class="content-text">Collision resolution is crucial for maintaining hash table efficiency. Different methods offer varying trade-offs between performance and memory usage.</p>
+                <div class="grid-2col">
+                    <div>
+                        <h4 class="section-subtitle">Separate Chaining</h4>
+                        <ul class="content-list">
+                            <li>Linked List Implementation: Each bucket contains a list</li>
+                            <li>Binary Search Tree: Improved search in high-collision scenarios</li>
+                            <li>Dynamic Array: Simple but potentially memory-inefficient</li>
+                            <li>Self-Balancing Trees: Optimal for large collision chains</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="section-subtitle">Open Addressing</h4>
+                        <ul class="content-list">
+                            <li>Linear Probing: Checks next available slot sequentially</li>
+                            <li>Quadratic Probing: Uses quadratic function for interval</li>
+                            <li>Double Hashing: Uses second hash function for interval</li>
+                            <li>Cuckoo Hashing: Uses multiple hash functions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Analysis -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3 class="card-title">Performance Analysis</h3>
+                <div class="grid-2col">
+                    <div>
+                        <h4 class="section-subtitle">Time Complexity</h4>
+                        <ul class="content-list">
+                            <li>Average Case: O(1) for insertion and lookup</li>
+                            <li>Worst Case: O(n) with many collisions</li>
+                            <li>Rehashing Cost: O(n) when resizing</li>
+                            <li>Load Factor Impact: Affects collision probability</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="section-subtitle">Space Complexity</h4>
+                        <ul class="content-list">
+                            <li>Base Structure: O(n) for n elements</li>
+                            <li>Chaining Overhead: Additional linked list space</li>
+                            <li>Open Addressing: Extra slots for probing</li>
+                            <li>Dynamic Resizing: Trade-off between space and collisions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications -->
+            <div class="content-card">
+                <div class="topic-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3 class="card-title">Practical Applications</h3>
+                <div class="grid-2col">
+                    <div>
+                        <h4 class="section-subtitle">Data Structures</h4>
+                        <ul class="content-list">
+                            <li>Hash Tables: Fast key-value storage</li>
+                            <li>Bloom Filters: Probabilistic set membership</li>
+                            <li>Caches: Quick data retrieval</li>
+                            <li>Symbol Tables: Compiler optimization</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="section-subtitle">Security Applications</h4>
+                        <ul class="content-list">
+                            <li>Password Storage: Secure credential management</li>
+                            <li>Digital Signatures: Document authentication</li>
+                            <li>Blockchain: Transaction verification</li>
+                            <li>Data Integrity: File checksums</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Removed the JavaScript as we're now using inline SVGs -->
+</body>
+</html>
