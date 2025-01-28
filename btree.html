@@ -1,72 +1,145 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>B-Tree Data Structure</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="navbar">
-        <div class="nav-content">
-            <div class="nav-logo">
-                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
-                <span>B-tree</span>
-            </div>
-            <div class="nav-links">
-                <a href="btree-concepts.html" class="active">Home</a>
-                <a href="btree-concepts.html">Learn</a>
-                <a href="btree-visualization.html">Visualize</a>
-                <a href="#">About</a>
-            </div>
+      <div class="nav-content">
+        <div class="nav-logo">
+          <svg
+            class="logo-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+          <span>B-tree</span>
         </div>
+        <div class="nav-links">
+          <a href="btree-concepts.html" class="active">Home</a>
+          <a href="btree-concepts.html">Learn</a>
+          <a href="btree-visualization.html">Visualize</a>
+          <a href="#">About</a>
+        </div>
+      </div>
     </div>
 
     <div class="hero">
-        <h1>B-Tree Data Structure</h1>
-        <p>Learn and visualize how B-trees efficiently organize and retrieve data</p>
+      <h1>B-Tree Data Structure</h1>
+      <p>
+        Learn and visualize how B-trees efficiently organize and retrieve data
+      </p>
     </div>
 
     <div class="topics">
-        <div class="topic-card">
-            <div class="topic-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-            </div>
-            <div class="topic-content">
-                <h3>Learn B-Tree Concepts</h3>
-                <p>Understand B-tree properties, operations, and real-world applications through interactive lessons.</p>
-                <a href="btree-concepts.html" class="topic-link">
-                    Start Learning
-                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 18l6-6-6-6"/>
-                    </svg>
-                </a>
-            </div>
+      <div class="topic-card">
+        <div class="topic-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path
+              d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+            ></path>
+          </svg>
         </div>
+        <div class="topic-content">
+          <h3>Learn B-Tree Concepts</h3>
+          <p>
+            Understand B-tree properties, operations, and real-world
+            applications through interactive lessons.
+          </p>
+          <a href="btree-concepts.html" class="topic-link">
+            Start Learning
+            <svg
+              class="arrow-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </a>
+        </div>
+      </div>
 
-        <div class="topic-card">
-            <div class="topic-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="5 3 19 12 5 21 5 3"/>
-                </svg>
-            </div>
-            <div class="topic-content">
-                <h3>Interactive Visualization</h3>
-                <p>Watch B-tree operations in action. Insert, delete, and search through an interactive B-tree visualization.</p>
-                <a href="btree-visualization.html" class="topic-link">
-                    Start Visualizing
-                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 18l6-6-6-6"/>
-                    </svg>
-                </a>
-            </div>
+      <div class="topic-card">
+        <div class="topic-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
         </div>
+        <div class="topic-content">
+          <h3>Interactive Visualization</h3>
+          <p>
+            Watch B-tree operations in action. Insert, delete, and search
+            through an interactive B-tree visualization.
+          </p>
+          <a href="btree-visualization.html" class="topic-link">
+            Start Visualizing
+            <svg
+              class="arrow-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path
+              d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+            ></path>
+          </svg>
+        </div>
+        <div class="topic-content">
+          <h3>Quiz - Test your knowledge</h3>
+          <p>
+            Challenge yourself with a quiz on B-tree concepts. Test your
+            understanding of properties, operations, and real-world
+            applications.
+          </p>
+          <a href="quiz/quiz.html" class="topic-link">
+            Take the Quiz
+            <svg
+              class="arrow-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </a>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

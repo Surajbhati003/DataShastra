@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Structures Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="quiz.css" />
+  </head>
+  <body>
+    <a href="/btree.html" class="back-button">← Back to B-Tree</a>
+    <div id="app">
+      <h1>Data Structures Quiz</h1>
+      <div id="quiz"></div>
+    </div>
+    <script type="module" src="quiz.js"></script>
+    <script type="module">
+      import { DSQuiz } from "./quiz.js";
+      // Initialize the quiz
+      new DSQuiz(document.querySelector("#quiz"));
+    </script>
+  </body>
+</html>
