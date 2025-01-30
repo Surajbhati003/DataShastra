@@ -117,7 +117,7 @@ Check out the live website here: [DataShastra](https://priyanshux26.github.io/Da
 
 If you have any questions or suggestions, feel free to reach out to us at:
 
-- Priyanshu (Team Leader): priyanshu@example.com
+- Priyanshu (Team Leader): bhojwanipriyanshu26@gmail.com
 
 ---
 
