@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+      { "source": "/hashing", "destination": "/hashing.html" },
+      { "source": "/collision", "destination": "/collision.html" },
+      { "source": "/btrees", "destination": "/btrees.html" }
+    ]
+  }
+  
