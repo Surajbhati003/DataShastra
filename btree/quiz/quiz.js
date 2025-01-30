@@ -16,16 +16,10 @@ export class DSQuiz {
         explanation: "The minimum degree (t) of a B-tree must be at least 2, which means each node (except root) must have at least t-1 keys."
       },
       {
-        question: "Which of the following is NOT a collision resolution technique in hash tables?",
-        options: [
-          "Linear Probing",
-          "Quadratic Probing",
-          "Binary Search",
-          "Separate Chaining"
-        ],
-        correct: 2,
-        explanation: "Binary Search is not a collision resolution technique. The main collision resolution techniques are Linear Probing, Quadratic Probing, Double Hashing, and Separate Chaining."
-      },
+        question: "What is the height of a B-tree with n keys and minimum degree t in the worst case?",
+        options: ["log_t(n)", "log_t(n+1)", "log_t(n+2)", "log_t(n-1)"],
+        correct: 0,
+        explanation: "The height of a B-tree in the worst case is log_t(n), ensuring efficient search, insertion, and deletion."},
       {
         question: "What is the maximum number of children a B-tree node can have with 'n' keys?",
         options: [
@@ -38,15 +32,10 @@ export class DSQuiz {
         explanation: "In a B-tree, a node with 'n' keys can have at most 'n + 1' children."
       },
       {
-        question: "What is the load factor in a hash table?",
-        options: [
-          "Number of buckets",
-          "Number of elements",
-          "Number of elements / Number of buckets",
-          "Number of buckets / Number of elements"
-        ],
-        correct: 2,
-        explanation: "Load factor = n/m, where n is the number of elements and m is the number of buckets. It measures how full the hash table is."
+        question: "Why are B-trees preferred in databases and file systems?",
+        options: ["Because they are binary trees", "Because they allow fast searching", "Because they use less memory", "Because they are recursive"],
+        correct: 1,
+        explanation: "B-trees allow fast searching, insertion, and deletion, making them suitable for databases and file systems."
       },
       {
         question: "Which property must a B-tree maintain?",
@@ -60,15 +49,10 @@ export class DSQuiz {
         explanation: "All leaves in a B-tree must be at the same level, which helps maintain balance and guarantees O(log n) operations."
       },
       {
-        question: "What happens when using linear probing and the hash table becomes nearly full?",
-        options: [
-          "Primary clustering",
-          "Secondary clustering",
-          "Perfect hashing",
-          "Dynamic resizing"
-        ],
+        question: "What is the order of a B-tree?",
+        options: ["The number of children a node can have", "The number of keys a node can have", "The height of the tree", "The depth of the tree"],
         correct: 0,
-        explanation: "Primary clustering occurs in linear probing when the hash table becomes nearly full, causing groups of consecutive slots to be occupied, which increases search times."
+        explanation: "The order of a B-tree is defined as the maximum number of children a node can have."
       },
       {
         question: "In a B-tree of order m, what is the maximum number of keys each node can contain?",
@@ -82,15 +66,10 @@ export class DSQuiz {
         explanation: "In a B-tree of order m, each node can contain at most 2m - 1 keys. This property helps maintain the tree's balance and efficient operations."
       },
       {
-        question: "What is Double Hashing in hash tables?",
-        options: [
-          "Using two hash tables",
-          "Using two hash functions for collision resolution",
-          "Hashing a value twice with the same function",
-          "Creating backup of hash table"
-        ],
+        question: "Which operation may cause a B-tree to split a node?",
+        options: ["Search", "Insertion", "Traversal", "Deletion"],
         correct: 1,
-        explanation: "Double Hashing uses two hash functions: one for the initial hash, and another for calculating the probe sequence when collisions occur."
+        explanation: "Insertion in a B-tree may cause a node to split if it exceeds the maximum number of allowed keys."
       },
       {
         question: "What is the minimum number of keys in a B-tree node (except root)?",
@@ -104,16 +83,11 @@ export class DSQuiz {
         explanation: "In a B-tree with minimum degree t, each node except the root must have at least t-1 keys to maintain the tree's properties."
       },
       {
-        question: "Which collision resolution technique might lead to secondary clustering?",
-        options: [
-          "Linear Probing",
-          "Quadratic Probing",
-          "Separate Chaining",
-          "Perfect Hashing"
-        ],
+        question: "How does a B-tree handle multiple key insertions?",
+        options: ["By always inserting at the root", "By inserting keys at the appropriate leaf node and splitting if necessary", "By using a separate structure for keys", "By rebalancing the entire tree after each insertion"],
         correct: 1,
-        explanation: "Quadratic probing can lead to secondary clustering, where sequences of probes follow the same pattern for different initial hash values."
-      }
+        explanation: "Keys are inserted at the appropriate leaf node, and if a node overflows, it is split to maintain balance."
+      },
     ];
     this.init();
   }

@@ -1,0 +1,129 @@
+/* Dark mode styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Main quiz container */
+.quiz-container {
+    background: #1e1e1e;
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Header */
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Question progress display */
+#question-progress {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #17a2b8; /* Blue-Green Highlight */
+}
+
+/* Question container */
+#question-container {
+    background: #2a2a2a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Question topic */
+.topic {
+    color: #bbbbbb;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+/* Options button styling */
+.option-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    transition: background 0.3s;
+}
+
+.option-btn:hover {
+    background-color: #444;
+}
+
+/* Correct and incorrect answer styling */
+.correct {
+    background-color: #17a2b8 !important; /* Blue-Green */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 5px;
+}
+
+.incorrect {
+    background-color: #dc3545 !important;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 5px;
+}
+
+/* Feedback container */
+#feedback-container {
+    font-size: 18px;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 5px;
+}
+
+/* Next button */
+#next-button, #restart-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background 0.3s;
+}
+
+#next-button:hover, #restart-button:hover {
+    background-color: #0056b3;
+}
+
+/* Hidden class */
+.hidden {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .quiz-container {
+        width: 90%;
+    }
+}
